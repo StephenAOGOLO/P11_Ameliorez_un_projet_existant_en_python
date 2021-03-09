@@ -2,7 +2,8 @@
 
     Bonjour,
 
-    Je vous remercie pour le travail réalisé. Néanmoins nous avons découvert qu’il manquait une fonctionnalité importante que nous aimerions développer.
+    Je vous remercie pour le travail réalisé.
+    Néanmoins nous avons découvert qu’il manquait une fonctionnalité importante que nous aimerions développer.
     Combien de temps cela vous prendrait-il ?
 
     Nous avons également remarqué des dysfonctionnements (rien n’apparaît lorsque nous lançons Internet Explorer).
