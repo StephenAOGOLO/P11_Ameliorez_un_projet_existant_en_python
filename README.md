@@ -1,6 +1,7 @@
 # P11_Ameliorez_un_projet_existant_en_python
 [![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeH7711sJeOaZ_HOpwi3M7MjPOQeOPE2TyMxn-_NyxyHu_O2tm&s)](https://openclassrooms.com/fr)  
-![http://206.189.30.229/substitute/home/](Readme/biscuit.png)![http://206.189.30.229/substitute/home/](Readme/it_logo.png)  
+![(http://206.189.30.229/substitute/home/)](Readme/biscuit.png)  
+![(http://206.189.30.229/substitute/home/)](Readme/it_logo.png)  
 
 # But du projet
 
