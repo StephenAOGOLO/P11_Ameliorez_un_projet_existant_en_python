@@ -18,5 +18,7 @@
     Cordialement,
 
     Dona Jimena
-    
-    
+
+# Organisation du projet
+Ce projet est réalisé selon une méthodologie agile.  
+Sa planification est disponible via ce [Trello](https://trello.com/invite/b/SYTimIfb/142082c5c7aaaf9c6b1b187ef790e314/p11ameliorezunprojetexistantavecpython).  
