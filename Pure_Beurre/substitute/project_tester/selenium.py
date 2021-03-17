@@ -124,7 +124,9 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
     def test_version(self):
         print("\nVERSION\n")
         current_version = self.selenium.find_element_by_id("version_tag")
-        self.assertEqual(self.stored_version, current_version)
+        if self.assertEqual(self.stored_version, current_version):
+            return 0
+        return 1
 
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
