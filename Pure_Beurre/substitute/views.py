@@ -5,11 +5,14 @@ from django.contrib.auth.models import User as usr
 
 from django.contrib.auth import authenticate, login as lgi, logout as lgo
 from django.contrib import messages
+from pathlib import Path
 
 # Create your views here.
 from .forms import CreateUserForm
 from .operations import *
 from .models import *
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def handler404(request, exception=None):
@@ -50,9 +53,11 @@ def search(request, product):
 
 
 def homepage(request):
+    tag = open_js_file(os.path.join(BASE_DIR, "substitute/static/substitute/json/text.json"))
     text = get_text()
     context = {"text": text,
-               "goal": "Trouvez un produit de substitution pour ceux que vous consommez tous les jours"}
+               "goal": "Trouvez un produit de substitution pour ceux que vous consommez tous les jours",
+               "version_tag": tag["fr"]["browser"]["version"]}
     if request.method == "POST":
         if "browser_product" in request.POST:
             browser_product = request.POST.get("browser_product")

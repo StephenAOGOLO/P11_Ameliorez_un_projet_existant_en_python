@@ -8,7 +8,6 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("Lancement de la campagne de tests..."))
         try:
             seleniumtestschrome()
-            #all_tests(os.name)
             coverage_report()
         except Exception as e:
             print(e)
