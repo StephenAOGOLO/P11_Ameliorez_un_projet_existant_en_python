@@ -204,9 +204,3 @@ def mentions(request):
     context = {"text": text}
     return render(request, "substitute/mentions.html", context)
 
-
-#def version_tag(request):
-#    text = open_js_file(open_js_file(os.path.join(BASE_DIR, "static/substitute/json/text.json")))
-#    tag = text["fr"]["browser"]["version"]
-#    context = {"version_tag": tag}
-#    return render(request, "substitute/browser.html", context)

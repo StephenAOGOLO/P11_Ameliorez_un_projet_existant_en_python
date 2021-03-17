@@ -119,8 +119,13 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         print("\nVERSION\n")
         current_tag = self.selenium.find_element_by_id("version_tag")
         current_version = current_tag.find_element_by_tag_name("h4").text
-        print(self.stored_version, current_version)
+        print(self.stored_version, " <-> "+current_version)
         self.assertEqual(self.stored_version, current_version)
+
+    def test_story(self):
+        # Add end of story
+        # Add Colette and Remy links
+        pass
 
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
