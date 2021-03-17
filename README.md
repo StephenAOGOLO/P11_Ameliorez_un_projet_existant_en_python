@@ -33,6 +33,17 @@ Rappel : Voici [le cahier des charges](/Readme/Cahier_des_charges.pdf) sur leque
 Ce projet est réalisé selon une méthodologie agile.  
 Sa planification est disponible via ce [Trello](https://trello.com/invite/b/SYTimIfb/142082c5c7aaaf9c6b1b187ef790e314/p11ameliorezunprojetexistantavecpython).  
 
+# Version du projet
+Plateforme web - PurBeurre : 1.2
+
+    - Langage de programmation : Python 3.8
+    - Framework : Django 3.1.2
+    - Serveur d'application : Gunicorn 20.0.4
+    - Serveur web : Nginx 1.18.0
+    - Base de données : Postgresql 13
+    - Hébergeur : Digital Ocean
+
+
 # Auteur
 Stephen A.OGOLO
 
