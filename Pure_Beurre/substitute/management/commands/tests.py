@@ -7,7 +7,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS("Lancement de la campagne de tests..."))
         try:
-            all_tests(os.name)
+            seleniumtestschrome()
+            #all_tests(os.name)
             coverage_report()
         except Exception as e:
             print(e)
@@ -35,7 +36,8 @@ def units_tests():
 def selenium_tests():
     os.system("coverage run --source='.' ./Pure_Beurre/manage.py test substitute.project_tester.selenium")
 
-
+def seleniumtestschrome():
+    os.system("coverage run --source='.' ./Pure_Beurre/manage.py test substitute.project_tester.selenium.SeleniumTestsChrome.")
 
 def coverage_report():
     os.system("coverage html --skip-covered --skip-empty -d substitute\project_tester\coverage_html")
