@@ -43,6 +43,15 @@ Plateforme web - PurBeurre : 1.2
     - Base de données : Postgresql 13
     - Hébergeur : Digital Ocean
 
+# Intégration Continue  
+A chaque modification du projet, ajout de nouvelles fonctionnalités ou de corrections,  
+le projet est envoyé sur la branche [1.2_stagging](https://github.com/StephenAOGOLO/P10_Deployez_votre_application_sur_un_serveur/tree/1.2_staging). C'est à ce niveau que le service Travis entre en fonction.  
+Ce service cree un environnement éphémère de production, proche de l'environnement du serveur hébergé.  
+Il exécute deux campagnes de tests. Une campagne de tests unitaires/fonctionnels et une campagne de tests d'intégration.
+Les tests unitaires utilisent les modules Django "TestCase" et "SimpleTestCase".  
+Les tests d'intégration sont gérés par le module selenium couplé à un WebDriver.  
+Ces derniers sont testés sur le navigateur Chrome.  
+
 
 # Auteur
 Stephen A.OGOLO

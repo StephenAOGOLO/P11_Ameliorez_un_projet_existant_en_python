@@ -12,12 +12,12 @@ import time, os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 class SeleniumTestsChrome(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         print("\nSETUP\n")
         super().setUpClass()
-
         cls.text_page = Text.objects.create(
             language="fr",
             mentions_title = "title",
@@ -56,7 +56,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             cls.wdc_options.add_argument('http://localhost')
             print(cls.wdc_options.arguments)
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
-            cls.text_json = open_js_file("/static/substitute/json/text.json")
+            cls.text_json = open_js_file(os.path.join(BASE_DIR, "static/substitute/json/text.json"))
 
         cls.stored_version = cls.text_json["version"]
         cls.selenium.implicitly_wait(10)
@@ -154,7 +154,6 @@ class SeleniumTestsError404(StaticLiveServerTestCase):
             cls.selenium = wdc(
                 executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
-
             cls.wdc_options = webdriver.ChromeOptions()
             cls.wdc_options.add_argument('--headless')
             cls.wdc_options.add_argument('--disable-gpu')
@@ -175,7 +174,6 @@ class SeleniumTestsError404(StaticLiveServerTestCase):
         print("\nTEARDOWN\n")
         cls.selenium.quit()
         super().tearDownClass()
-
 
     def test_404(self):
         print("\nTEST 404\n")
@@ -228,8 +226,6 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
             print(cls.wdc_options.arguments)
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'),
                                options=cls.wdc_options)
-
-
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
 
     @classmethod
@@ -238,27 +234,4 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
         cls.selenium.quit()
         super().tearDownClass()
 
-    #def test_500(self):
-    #    print("\nTEST 500\n")
-    #    time.sleep(2)
-    #    self.selenium.get('%s%s' % (self.live_server_url, "/substitute/home/"))
-    #    time.sleep(2)
-    #    main_url = self.live_server_url
-    #    self.selenium.find_element_by_class_name("login").click()
-    #    time.sleep(2)
-    #    self.assertEqual(
-    #        self.selenium.current_url,
-    #        main_url + reverse("substitute:login")
-    #    )
-    #    username_input = self.selenium.find_element_by_name("username")
-    #    username_input.send_keys(self.a_user_chrome.username)
-    #    time.sleep(2)
-    #    password_input = self.selenium.find_element_by_name("password")
-    #    password_input.send_keys(self.a_user_clear_password)
-    #    time.sleep(2)
-    #    self.selenium.find_element_by_class_name("connect-user").click()
-    #    time.sleep(2)
-    #    alert = self.selenium.find_element_by_id("500-area")
-    #    self.assertEqual(alert.find_element_by_tag_name("h1").text,
-    #                     "Nous avons un problème interne !!!!")
 
