@@ -122,7 +122,8 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
 
     def test_version(self):
         print("\nVERSION\n")
-        current_version = self.selenium.find_element_by_id("version_tag")
+        current_tag = self.selenium.find_element_by_id("version_tag")
+        current_version = current_tag.find_element_by_tag_name("h4").text
         print(self.stored_version)
         self.assertEqual(self.stored_version, current_version)
 
