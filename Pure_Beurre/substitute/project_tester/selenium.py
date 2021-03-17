@@ -8,7 +8,7 @@ from selenium import webdriver
 from substitute.operations import *
 from substitute.models import *
 from pathlib import Path
-import time, os
+import time, os, sys
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -125,7 +125,8 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         current_tag = self.selenium.find_element_by_id("version_tag")
         current_version = current_tag.find_element_by_tag_name("h4").text
         print(self.stored_version)
-        self.assertEqual(self.stored_version, current_version)
+        if self.assertEqual(self.stored_version, current_version):
+            sys.exit(1)
 
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
