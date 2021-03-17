@@ -33,6 +33,26 @@ Rappel : Voici [le cahier des charges](/Readme/Cahier_des_charges.pdf) sur leque
 Ce projet est réalisé selon une méthodologie agile.  
 Sa planification est disponible via ce [Trello](https://trello.com/invite/b/SYTimIfb/142082c5c7aaaf9c6b1b187ef790e314/p11ameliorezunprojetexistantavecpython).  
 
+# Version du projet
+Plateforme web - PurBeurre : 1.2
+
+    - Langage de programmation : Python 3.8
+    - Framework : Django 3.1.2
+    - Serveur d'application : Gunicorn 20.0.4
+    - Serveur web : Nginx 1.18.0
+    - Base de données : Postgresql 13
+    - Hébergeur : Digital Ocean
+
+# Intégration Continue  
+A chaque modification du projet, ajout de nouvelles fonctionnalités ou de corrections,  
+le projet est envoyé sur la branche [1.2_stagging](https://github.com/StephenAOGOLO/P10_Deployez_votre_application_sur_un_serveur/tree/1.2_staging). C'est à ce niveau que le service Travis entre en fonction.  
+Ce service cree un environnement éphémère de production, proche de l'environnement du serveur hébergé.  
+Il exécute deux campagnes de tests. Une campagne de tests unitaires/fonctionnels et une campagne de tests d'intégration.
+Les tests unitaires utilisent les modules Django "TestCase" et "SimpleTestCase".  
+Les tests d'intégration sont gérés par le module selenium couplé à un WebDriver.  
+Ces derniers sont testés sur le navigateur Chrome.  
+
+
 # Auteur
 Stephen A.OGOLO
 

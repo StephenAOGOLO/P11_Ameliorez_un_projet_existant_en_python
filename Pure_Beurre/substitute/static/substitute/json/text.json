@@ -29,6 +29,10 @@
       "story": "Nous sommes amoureux de la gastronomie francaise. Travaillant quotidiennement avec les meilleurs produits du terroir, nous affectionnons particulierement la bonne chaire et aimons partager notre passion.",
       "contact": "Notre restaurant, situe a Montmartre - Paris. Pour plus d'information sur nos service, merci de nous contacter : ",
       "button_mail": "https://www.linkedin.com/in/stephen-a-ogolo-410ab7b0/"
+    },
+    "browser":
+    {
+      "version": "1.2"
     }
   }
 }

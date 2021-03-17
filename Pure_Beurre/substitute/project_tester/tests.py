@@ -635,7 +635,6 @@ class TestOperations(TestCase):
         self.min_urls_unix = "/static/substitute/json/min_urls.json"
         self.min_urls_win = ".\\substitute\\static\\substitute\\json\\min_urls.json"
 
-
     def test_DataSearch(self):
         result = DataSearch(self.text)
         data = result.big_data
@@ -662,7 +661,6 @@ class TestOperations(TestCase):
         print(data)
         self.assertEqual(data, self.an_aliment)
 
-
     def test_DataSave(self):
         size_before = len(Historic.objects.all())
         another_aliment = Aliment.objects.create(name="another_aliment")
@@ -670,7 +668,6 @@ class TestOperations(TestCase):
         record.store_data()
         size_after = len(Historic.objects.all())
         self.assertEqual(size_after, size_before + 1)
-
 
     def test_Data(self):
         if os.name == "nt":
@@ -698,3 +695,5 @@ class TestOperations(TestCase):
         record.store_data()
         the_historic = get_historic(self.a_customer)
         self.assertEqual(len(the_historic), 1)
+
+
