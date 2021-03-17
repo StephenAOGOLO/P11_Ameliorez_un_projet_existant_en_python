@@ -57,7 +57,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             print(cls.wdc_options.arguments)
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
             cls.text_json = open_js_file(os.path.join(BASE_DIR, "static/substitute/json/text.json"))
-        cls.stored_version = cls.text_json
+        cls.stored_version = cls.text_json["fr"]["browser"]["version"]
         cls.selenium.implicitly_wait(10)
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
         print(cls.live_server_url + "/substitute/home/")
@@ -124,7 +124,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         print("\nVERSION\n")
         current_version = self.selenium.find_element_by_id("version_tag")
         print(self.stored_version)
-        self.assertEqual(self.stored_version["version"], current_version)
+        self.assertEqual(self.stored_version, current_version)
 
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
