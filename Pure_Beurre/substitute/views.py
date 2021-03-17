@@ -198,3 +198,4 @@ def mentions(request):
     text = get_text()
     context = {"text": text}
     return render(request, "substitute/mentions.html", context)
+

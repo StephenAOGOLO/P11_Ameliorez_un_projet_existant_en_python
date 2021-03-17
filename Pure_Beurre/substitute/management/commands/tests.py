@@ -36,6 +36,7 @@ def selenium_tests():
     os.system("coverage run --source='.' ./Pure_Beurre/manage.py test substitute.project_tester.selenium")
 
 
+
 def coverage_report():
     os.system("coverage html --skip-covered --skip-empty -d substitute\project_tester\coverage_html")
 
