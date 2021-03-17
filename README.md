@@ -3,7 +3,6 @@
 ![(http://206.189.30.229/substitute/home/)](Readme/biscuits.png)  
 ![(http://206.189.30.229/substitute/home/)](Readme/it_logo.png)  
 
-
 # But du projet
 
 
