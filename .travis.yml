@@ -12,9 +12,7 @@ before_script:
   - chmod +x ./Pure_Beurre/substitute/project_tester/operadriver_linux64/operadriver
   - pip install -r requirements.txt
   - psql -c 'create database purebeurre;' -U postgres
-  - touch purbeurre_tests.sh
-  - chmod +x purbeurre_tests.sh
-  - printf "#!/bin/bash\n\n./Pure_Beurre/manage.py tests\necho $?\n"
+
 branches:
   only:
     - 1.2_staging
@@ -30,7 +28,7 @@ script:
   - ./Pure_Beurre/manage.py all_aliments
   #- ./Pure_Beurre/manage.py tests
   #- source purbeurre_tests.sh
-  - ./Pure_Beurre/manage.py test substitute.project_tester.selenium.SeleniumTestsChrome
+  - ./Pure_Beurre/manage.py test substitute.project_tester
 
 
 
