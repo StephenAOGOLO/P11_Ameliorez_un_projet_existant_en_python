@@ -145,6 +145,26 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         self.assertEqual(self.selenium.current_url, self.remy_story)
         self.selenium.back()
 
+    def test_06_product_picture(self):
+        print("\nPRODUCT PICTURE\n")
+        self.a_category = Category.objects.create(name="product",
+                                                  id_name="product")
+        self.an_aliment = Aliment.objects.create(name="product",
+                                                 category=self.a_category.name,
+                                url_image="https://static.openfoodfacts.org/images/products/730/040/048/1571/front_fr.78.200.jpg",
+                                url="https://fr.openfoodfacts.org/produit/7300400481571/wasa-tartine-croustillante-leger")
+
+        self.a_category.save()
+        self.an_aliment.save()
+        time.sleep(2)
+        searched_aliment = self.selenium.find_element_by_id("home-searchbar")
+        searched_aliment.send_keys(self.an_aliment.name)
+        time.sleep(2)
+        self.selenium.find_element_by_id("button-searchbar").click()
+        time.sleep(2)
+        self.selenium.find_element_by_id("product-picture").click()
+        self.assertEqual(self.selenium.current_url, self.an_aliment.url)
+
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
     @classmethod

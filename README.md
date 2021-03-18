@@ -52,6 +52,15 @@ Les tests unitaires utilisent les modules Django "TestCase" et "SimpleTestCase".
 Les tests d'intégration sont gérés par le module selenium couplé à un WebDriver.  
 Ces derniers sont testés sur le navigateur Chrome.  
 
+# Historique des 'Builds'
+L'historique suivant reprends les principaux commits qui ont été réalisés durant le projet.  
+Ces commits proviennent uniquement de la branche '1.2_staging', branche concernée par l'intégration continue de TRAVIS.  
+
+    - Build #1 : Passed(unexpectedly) - commit c753462 : HomePage Testing Website Version
+    - Build #12 : Passed - commit 83eb881 : HomePage Updating Website Version
+    - Build #18 : Failed - commit 946d5bc : HomePage Testing Story links
+    - Build #19 : Passed - commit 06d6e14 : HomePage Updating Story links
+
 
 # Auteur
 Stephen A.OGOLO
