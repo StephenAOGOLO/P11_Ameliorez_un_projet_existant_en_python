@@ -134,6 +134,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         time.sleep(2)
         print(self.selenium.current_url, " <-> "+self.colette_story)
         self.assertEqual(self.selenium.current_url, self.colette_story)
+        self.selenium.back()
 
     def test_05_remy_story(self):
         print("\nREMY STORY\n")
@@ -141,8 +142,8 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         self.selenium.find_element_by_id("remy-story").click()
         time.sleep(2)
         print(self.selenium.current_url, " <-> " + self.remy_story)
-        if not self.assertEqual(self.selenium.current_url, self.remy_story):
-            return sys.exit(1)
+        self.assertEqual(self.selenium.current_url, self.remy_story)
+        self.selenium.back()
 
 
 class SeleniumTestsError404(StaticLiveServerTestCase):

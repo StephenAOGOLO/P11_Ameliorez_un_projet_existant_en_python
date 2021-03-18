@@ -53,11 +53,13 @@ def search(request, product):
 
 
 def homepage(request):
-    tag = open_js_file(os.path.join(BASE_DIR, "substitute/static/substitute/json/text.json"))
+    home_text = open_js_file(os.path.join(BASE_DIR, "substitute/static/substitute/json/text.json"))
     text = get_text()
     context = {"text": text,
                "goal": "Trouvez un produit de substitution pour ceux que vous consommez tous les jours",
-               "version_tag": tag["fr"]["browser"]["version"]}
+               "version_tag": home_text["fr"]["browser"]["version"],
+               "colette_story": home_text["fr"]["home"]["colette_story"],
+               "remy_story": home_text["fr"]["home"]["remy_story"]}
     if request.method == "POST":
         if "browser_product" in request.POST:
             browser_product = request.POST.get("browser_product")
