@@ -28,7 +28,8 @@ script:
   - ./Pure_Beurre/manage.py all_aliments
   #- ./Pure_Beurre/manage.py tests
   #- source purbeurre_tests.sh
-  - ./Pure_Beurre/manage.py test substitute.project_tester
+  - ./Pure_Beurre/manage.py test substitute.project_tester.tests
+  - ./Pure_Beurre/manage.py test substitute.project_tester.selenium
 
 
 
