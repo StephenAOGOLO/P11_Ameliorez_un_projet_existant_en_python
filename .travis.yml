@@ -14,7 +14,7 @@ before_script:
   - psql -c 'create database purebeurre;' -U postgres
   - touch purbeurre_tests.sh
   - chmod +x purbeurre_tests.sh
-  - printf "#!/bin/bash\n\n ./Pure_Beurre/manage.py tests\necho $?\n"
+  - printf "#!/bin/bash\n\n./Pure_Beurre/manage.py tests\necho $?\n"
 branches:
   only:
     - 1.2_staging
@@ -29,7 +29,8 @@ script:
   - ./Pure_Beurre/manage.py environs
   - ./Pure_Beurre/manage.py all_aliments
   #- ./Pure_Beurre/manage.py tests
-  - .purbeurre_tests.sh
+  #- source purbeurre_tests.sh
+  - ./Pure_Beurre/manage.py test substitute.project_tester.selenium.SeleniumTestsChrome
 
 
 
