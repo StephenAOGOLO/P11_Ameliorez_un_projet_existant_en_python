@@ -14,7 +14,7 @@ before_script:
   - psql -c 'create database purebeurre;' -U postgres
   - touch purbeurre_tests.sh
   - chmod +x purbeurre_tests.sh
-  - printf "#!/bin/bash\n\n ./Pure_Beurre/manage.py tests\n"
+  - printf "#!/bin/bash\n\n ./Pure_Beurre/manage.py tests\necho $?\n"
 branches:
   only:
     - 1.2_staging
