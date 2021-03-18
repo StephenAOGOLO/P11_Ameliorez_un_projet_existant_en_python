@@ -30,7 +30,9 @@ class TestViewsUnlogged(TestCase):
             home_c = "home_c",
             home_bm = "home_bm",
         )
-        self.an_aliment = Aliment.objects.create(name="an_aliment")
+        self.an_aliment = Aliment.objects.create(name="an_aliment",
+                                                 url_image="https://static.openfoodfacts.org/images/products/730/040/048/1571/front_fr.78.200.jpg",
+                                                 url="https://fr.openfoodfacts.org/produit/7300400481571/wasa-tartine-croustillante-leger")
         self.another_aliment = Aliment.objects.create(name="another_aliment")
         self.a_user = User.objects.create_user(username="a_user", email="a_user@purebeurre.com", password="user.1234")
         self.a_second_user = User.objects.create_user(username="a_second_user", email="a__second_user@purebeurre.com", password="a_second_user.1234")
@@ -193,6 +195,11 @@ class TestViewsUnlogged(TestCase):
         response = self.c.post(self.login_url)
         print(response)
         self.assertEqual(response.status_code, 200)
+
+    #def test_url_image_1(self):
+    #    print("\n\ntest_url_image_1")
+
+
 
     def test_404(self):
         print("\n\ntest_404")

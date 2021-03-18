@@ -42,7 +42,9 @@
         <div class="col-sm-4 col-12 h2">
             <div class="col-8 h2 border"style="margin-left:auto">
                 <div class="col-12 nutriscore_tag chocolate-text border">{{ value.nutriscore }}</div>
-                <div><img src="{{ value.url_image }}"></div>
+
+                <div id="product-picture"><img src="{{ value.url_image }}"></div>
+
                 <div class="col-12 justify-content-center">
                     <div class="col-12"><br/></div>
                     <a href="{% url 'substitute:aliment' s_id=key p_id=product.id u_id=user.id %}" class="chocolate-text " style="text-decoration:none">
