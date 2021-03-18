@@ -53,9 +53,12 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
         cls.text_json = open_js_file(os.path.join(BASE_DIR, "static/substitute/json/text.json"))
         cls.stored_version = cls.text_json["fr"]["browser"]["version"]
+        cls.colette_story = cls.text_json["fr"]["home"]["colette_story"]
+        cls.remy_story = cls.text_json["fr"]["home"]["remy_story"]
         cls.selenium.implicitly_wait(10)
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
         print(cls.live_server_url + "/substitute/home/")
+        time.sleep(2)
 
     @classmethod
     def tearDownClass(cls):
@@ -63,8 +66,9 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         cls.selenium.quit()
         super().tearDownClass()
 
-    def test_logout(self):
+    def test_02_logout(self):
         print("\nLOGOUT\n")
+        time.sleep(2)
         self.text_page = Text.objects.create(
             language="fr",
             mentions_title = "title",
@@ -91,7 +95,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             main_url + reverse("substitute:home")
         )
 
-    def test_login(self):
+    def test_01_login(self):
         print("\nLOGIN\n")
         time.sleep(2)
         main_url = self.live_server_url
@@ -115,12 +119,30 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             main_url + reverse("substitute:account")
         )
 
-    def test_version(self):
+    def test_03_version(self):
         print("\nVERSION\n")
+        time.sleep(2)
         current_tag = self.selenium.find_element_by_id("version_tag")
         current_version = current_tag.find_element_by_tag_name("h4").text
         print(self.stored_version, " <-> "+current_version)
         self.assertEqual(self.stored_version, current_version)
+
+    def test_04_colette_story(self):
+        print("\nCOLETTE STORY\n")
+        time.sleep(2)
+        self.selenium.find_element_by_id("colette-story").click()
+        time.sleep(2)
+        print(self.selenium.current_url, " <-> "+self.colette_story)
+        self.assertEqual(self.selenium.current_url, self.colette_story)
+
+    def test_05_remy_story(self):
+        print("\nREMY STORY\n")
+        time.sleep(2)
+        self.selenium.find_element_by_id("remy-story").click()
+        time.sleep(2)
+        print(self.selenium.current_url, " <-> " + self.remy_story)
+        if not self.assertEqual(self.selenium.current_url, self.remy_story):
+            return sys.exit(1)
 
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
