@@ -7,6 +7,7 @@
         background: url('{{ substitut.url_image}}');
         background-position: center;
     }
+
 </style>
 <div class="container-fluid" id="aliment-area">
     <div class="row">
@@ -37,19 +38,6 @@
         <div class="col-6 d-flex justify-content-center  h3" style="align-items:center">
             <div class="col-6 d-flex justify-content-center  h3" style="align-items:center">
                 <img src="{{ substitut_nutriscore }}" alt="Nutriscore"></div>
-            <!--
-                {% if substitut.nutriscore == "a" %}
-                <img src="{% static 'substitute/png/a_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% elif substitut.nutriscore == "b" %}
-                <img src="{% static 'substitute/png/b_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% elif substitut.nutriscore == "c" %}
-                <img src="{% static 'substitute/png/c_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% elif substitut.nutriscore == "d" %}
-                <img src="{% static 'substitute/png/d_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% elif substitut.nutriscore == "e" %}
-                <img src="{% static 'substitute/png/e_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% endif %}
-                -->
             </div>
             <div class="col-6 d-flex justify-content-center h3">
                 <div class="col-12"><img src="{{ substitut.image_nutriments }}"></div>
@@ -58,6 +46,27 @@
             <div class="col-6 d-flex justify-content-center underline-text h3">Energie</div>
             <div class="col-6 d-flex justify-content-center h3"></div>
             <div class="col-6 d-flex justify-content-center h3">{{ substitut.energy_kj }} {{ substitut.energy_kj_unit }} <br/>{{ substitut.energy_kcal }} {{ substitut.energy_kcal_unit }}</div>
+            <div class="col-12"> <br/></div>
+<!---------------------------------------------------------------------------------------------------------------------------------------->
+<div class="container-fluid">
+    <div class="row" id="gmap">
+        <div class="col-12">Les Points de ventes</div>
+        <div class="col-12"></div>
+        <div class="col-4">-- stores --
+            <div><img src="{% static 'substitute/png/shop.png' %}" height="100" width="100" alt="Stores"></div>
+            <div class="col-12 border">1<br/>2<br/>3<br/></div>
+        </div>
+        <div class="col-4 border" id="gmap-square">
+            <div id="gmap-window"></div>
+            <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzIiQpQvRg5ozL9qqrGn3-8mexYTtD2fY&callback=initMap&v=weekly"></script>
+        </div>
+        <div class="col-4">-- purchase places --
+            <div><img src="{% static 'substitute/png/countries.png' %}" height="100" width="100" alt="Stores"></div>
+            <div class="col-12 border">A<br/>B<br/>C<br/>D<br/>E<br/></div>
+        </div>
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-12"> <br/></div>
             <div class="col-12 h3">
                 <form method="POST">

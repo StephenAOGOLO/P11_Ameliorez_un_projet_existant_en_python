@@ -498,3 +498,8 @@ body
     align-items: center;
     justify-content: center;
 }
+#gmap-window
+{
+  height: 100%;
+}
+
