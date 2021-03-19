@@ -640,7 +640,7 @@ class TestOperations(TestCase):
         self.an_aliment.tag.add(self.a_category)
         self.text = "text"
         self.min_urls_unix = "/static/substitute/json/min_urls.json"
-        self.min_urls_win = ".\\substitute\\static\\substitute\\json\\min_urls.json"
+        self.min_urls_win = "\\static\\substitute\\json\\min_urls.json"
 
     def test_DataSearch(self):
         result = DataSearch(self.text)

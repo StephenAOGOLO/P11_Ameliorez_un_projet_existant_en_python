@@ -147,6 +147,23 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
 
     def test_06_product_picture(self):
         print("\nPRODUCT PICTURE\n")
+        self.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         self.a_category = Category.objects.create(name="product",
                                                   id_name="product")
         self.an_aliment = Aliment.objects.create(name="product",
@@ -163,7 +180,9 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         self.selenium.find_element_by_id("button-searchbar").click()
         time.sleep(2)
         self.selenium.find_element_by_id("product-picture").click()
+        print(self.selenium.current_url, " <-> " + self.an_aliment.url)
         self.assertEqual(self.selenium.current_url, self.an_aliment.url)
+        self.selenium.back()
 
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
@@ -191,7 +210,7 @@ class SeleniumTestsError404(StaticLiveServerTestCase):
         cls.text_page.save()
         if os.name == 'nt':
             cls.selenium = wdc(
-                executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
+                executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\11_Ameliorez_un_projet_existant_en_python\\P_11\\1.2\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
             cls.wdc_options = webdriver.ChromeOptions()
             cls.wdc_options.add_argument('--headless')
@@ -205,7 +224,6 @@ class SeleniumTestsError404(StaticLiveServerTestCase):
             print(cls.wdc_options.arguments)
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'),
                                options=cls.wdc_options)
-
         cls.selenium.get(cls.live_server_url)
 
     @classmethod
@@ -250,7 +268,7 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
         cls.a_user_chrome.save()
         if os.name == 'nt':
             cls.selenium = wdc(
-                executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
+                executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\11_Ameliorez_un_projet_existant_en_python\\P_11\\1.2\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
 
             cls.wdc_options = webdriver.ChromeOptions()
