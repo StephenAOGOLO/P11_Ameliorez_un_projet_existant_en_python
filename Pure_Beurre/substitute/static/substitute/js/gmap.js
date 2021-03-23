@@ -1,33 +1,24 @@
 let map;
 
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("gmap-window"), {
-    center: { lat: 45.764043, lng: 4.835659 },
+    center: { lat: lat, lng: lng },
+    //center: { lat: 45.7769226, lng: 4.8748023 },
     zoom: 11,
   });
     marker = new google.maps.Marker(
   {
-      position: { lat: 45.764043, lng: 4.835659},
+      position: { lat: lat, lng: lng },
+      //position: { lat: 45.7769226, lng: 4.8748023},
       map: map
-  });
+  };
+      second = new google.maps.Marker(
+  {
+      //position: { lat: lat, lng: lng },
+      position: { lat: 45.6769226, lng: 4.8748023},
+      map: map
+  }
+  );
 }
-/*
-//form_sheet.addEventListener("submit", function(event)
-//{
-//    event.preventDefault();
-//    postFormData("/catcher", new FormData(form_sheet))
-//    .then(response =>{
-//        console.log(response["place"]["lat"])+console.log(response["place"]["lng"]);
-//         othermap = new google.maps.Map(document.getElementById("gmap-window"),
-//                    {
-//                        center: { lat: response["place"]["lat"] , lng: response["place"]["lng"] },
-//                        zoom: response["place"]["zoom"]
-//                    });
-//                    marker = new google.maps.Marker(
-//                    {
-//                        position: { lat: response["place"]["lat"] , lng: response["place"]["lng"] },
-//                        map: othermap
-//                    });
-//    })
-//})
-*/
+

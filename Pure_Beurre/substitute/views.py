@@ -11,6 +11,7 @@ from pathlib import Path
 from .forms import CreateUserForm
 from .operations import *
 from .models import *
+from Pure_Beurre.settings import GMAP_KEY
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -105,13 +106,24 @@ def aliment(request, p_id, s_id, u_id):
         return redirect("/substitute/search/product={}".format(browser_product))
     s_session = DataAliment(s_id)
     substitute = s_session.aliment
+
+    substitute_stores = str(substitute.store)
+    substitute_pp = str(substitute.purchase_places)
+    substitute_stores = substitute_stores.split(", ")
+    substitute_pp = substitute_pp.split(", ")
+    gmap_markers = gmap_builder(substitute_stores, substitute_pp)
     p_session = DataAliment(p_id)
     product = p_session.aliment
     substitute_nutrscore = set_nutriscore_tag(substitute.nutriscore)
     context = {"substitut": substitute,
                "substitut_nutriscore": substitute_nutrscore,
                "produit": product,
-               "utilisateur_id": u_id
+               "utilisateur_id": u_id,
+               "gmap_key": GMAP_KEY,
+               "stores": substitute_stores,
+               "pps": substitute_pp,
+               "lat": str(50.4462262),
+               "lng": str(2.9444979)
                }
     return render(request, "substitute/aliment.html", context)
 
@@ -205,4 +217,5 @@ def mentions(request):
     text = get_text()
     context = {"text": text}
     return render(request, "substitute/mentions.html", context)
+
 

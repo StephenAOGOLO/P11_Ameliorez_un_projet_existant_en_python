@@ -13,6 +13,7 @@ import json
 import requests
 from .models import *
 from .Values import *
+from Pure_Beurre.settings import GMAP_KEY
 lg.basicConfig(level=lg.INFO)
 
 
@@ -364,3 +365,35 @@ def fill_text():
 def get_text(lang="fr"):
     text = Text.objects.get(language=lang)
     return text
+
+
+def gmap_builder(stores, purchase_places):
+    gmap_book = {}
+    for i, e in enumerate(stores):
+        for x, y in enumerate(purchase_places):
+            url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
+            url += "key=" + GMAP_KEY
+            target = "&query=" + e + "+" + y
+            url += target
+            response = requests.get(url)
+            response = json.loads(response.content.decode("utf-8"))
+            book = gmap_seeker(e, y, response)
+            gmap_book[str(e)+"_"+str(y)] = book
+    return gmap_book
+
+
+def gmap_seeker(store, pp, response):
+    book = {}
+    results = response.get("results")
+    for i_1, e_1 in enumerate(results):
+        place_id = e_1.get("place_id")
+        location = e_1.get("geometry").get("location")
+        location["store"] = store
+        location["pp"] = pp
+        location["place_id"] = place_id
+        book[place_id] = location
+    return book
+
+
+
+
