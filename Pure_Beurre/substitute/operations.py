@@ -371,7 +371,7 @@ def gmap_builder(stores, purchase_places):
     gmap_book = {}
     for i, e in enumerate(stores):
         for x, y in enumerate(purchase_places):
-            url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
+            url = "https://maps.googleapis.com/maps/api/place/textsearch/json?libraries=places&"
             url += "key=" + GMAP_KEY
             target = "&query=" + e + "+" + y
             url += target
@@ -379,21 +379,45 @@ def gmap_builder(stores, purchase_places):
             response = json.loads(response.content.decode("utf-8"))
             book = gmap_seeker(e, y, response)
             gmap_book[str(e)+"_"+str(y)] = book
-    return gmap_book
+    return book
 
 
 def gmap_seeker(store, pp, response):
     book = {}
     results = response.get("results")
     for i_1, e_1 in enumerate(results):
+        info = {}
         place_id = e_1.get("place_id")
         location = e_1.get("geometry").get("location")
-        location["store"] = store
-        location["pp"] = pp
-        location["place_id"] = place_id
-        book[place_id] = location
+        #info["store"] = store
+        #info["pp"] = pp
+        #info["place_id"] = place_id
+        #info["location"] = location
+        #book[place_id] = {"info": info,
+        #                  "location": location
+        #                  }
+        book[str(place_id)] = {
+            "lat": str(location["lat"]),
+            "lng": str(location["lng"])
+        }
     return book
 
 
+def average_location(book):
+    all_lat = 0
+    all_lng = 0
+    count = 0
+    for k, v in book.items():
+        lat = v["lat"]
+        lng = v["lng"]
+        all_lat += float(lat)
+        all_lng += float(lng)
+        count += 1
+    print(all_lat)
+    print(count)
+    av_lat = (all_lat/count)
+    av_lng = (all_lng/count)
+    book_average = {"av_lat": str(av_lat), "av_lng": str(av_lng)}
+    return book_average
 
 

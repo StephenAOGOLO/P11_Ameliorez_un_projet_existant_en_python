@@ -112,6 +112,7 @@ def aliment(request, p_id, s_id, u_id):
     substitute_stores = substitute_stores.split(", ")
     substitute_pp = substitute_pp.split(", ")
     gmap_markers = gmap_builder(substitute_stores, substitute_pp)
+    gmap_average = average_location(gmap_markers)
     p_session = DataAliment(p_id)
     product = p_session.aliment
     substitute_nutrscore = set_nutriscore_tag(substitute.nutriscore)
@@ -123,7 +124,9 @@ def aliment(request, p_id, s_id, u_id):
                "stores": substitute_stores,
                "pps": substitute_pp,
                "lat": str(50.4462262),
-               "lng": str(2.9444979)
+               "lng": str(2.9444979),
+               "gmap_markers": gmap_markers,
+               "gmap_average": gmap_average
                }
     return render(request, "substitute/aliment.html", context)
 
