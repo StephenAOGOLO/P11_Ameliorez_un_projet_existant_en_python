@@ -191,3 +191,32 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 20000
+
+if DEBUG:
+    # SMTP dev Configuration
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = "devdjangotest@gmail.com"
+    EMAIL_HOST_PASSWORD = "devdjangotest.1234"
+
+else:
+    if 'travis' in platform.uname().node:
+        # SMTP Test Configuration
+        EMAIL_BACKEND = ""
+        EMAIL_HOST = ""
+        EMAIL_PORT = 587
+        EMAIL_USE_TLS = True
+        EMAIL_HOST_USER = ""
+        EMAIL_HOST_PASSWORD = ""
+
+    elif platform.uname().node == 'django-s-1vcpu-1gb-lon1-01':
+        # SMTP prod Configuration
+        EMAIL_BACKEND = ""
+        EMAIL_HOST = ""
+        EMAIL_PORT = 587
+        EMAIL_USE_TLS = True
+        EMAIL_HOST_USER = ""
+        EMAIL_HOST_PASSWORD = ""
+

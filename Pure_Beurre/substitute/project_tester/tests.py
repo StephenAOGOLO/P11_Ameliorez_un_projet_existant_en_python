@@ -1,8 +1,10 @@
 from substitute import views
 from substitute.operations import *
+from substitute.mail import *
 from django.conf.urls import handler404, handler500
 from django.contrib.auth.models import User
 from django.urls import reverse, resolve
+from django.core import mail
 from django.test import TestCase, SimpleTestCase, Client
 import os
 
@@ -703,4 +705,22 @@ class TestOperations(TestCase):
         the_historic = get_historic(self.a_customer)
         self.assertEqual(len(the_historic), 1)
 
+
+class TestEmails(TestCase):
+    def test_01_generic_send_email(self):
+        print("test_01_generic_send_email")
+        mail.send_mail(
+            'objet : Test de django', 'Voici le test de mail django.',
+            'from@example.com', ['to@example.com'],
+            fail_silently=False,
+        )
+
+        # Test that one message has been sent.
+        self.assertEqual(len(mail.outbox), 1)
+
+        # Verify that the subject of the first message is correct.
+        self.assertEqual(mail.outbox[0].subject, 'objet : Test de django')
+
+    def test_02_send_confirmation(self):
+        print("test_02_send_confirmation")
 

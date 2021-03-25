@@ -1,0 +1,18 @@
+{% extends 'substitute/base.html'%}
+{% block heart %}
+{% load static %}
+
+<body>
+  <div class="container">
+    <div class="row">
+          <div class="col-12 col-md-12 h1 d-flex justify-content-center butter-text font-3">Nous vous avons envoyé un E-mail d'activation.</div>
+          <div class="col-12 col-md-12 h1 d-flex justify-content-center butter-text font-3">Merci de Verifier et cliquer sur le lien "ACTIVER MON COMPTE"</div>
+          <div class="col-12"><a class="navbar-brand d-flex justify-content-center"><img src="{% static 'substitute/jpg/ratatouille-11.jpg' %}" alt="logo de Remy"></a></div>
+          <br>
+          <br>
+          <div class="col-12 col-md-12 mx-auto font-3"><a href="{% url 'substitute:home' %}">Retour à la page d'acceuil</a></div>
+      </div>
+    </div>
+</body>
+
+{% endblock %}

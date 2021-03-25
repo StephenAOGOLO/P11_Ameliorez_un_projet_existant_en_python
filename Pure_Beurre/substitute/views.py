@@ -2,15 +2,17 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User as usr
-
 from django.contrib.auth import authenticate, login as lgi, logout as lgo
 from django.contrib import messages
 from pathlib import Path
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
 
 # Create your views here.
 from .forms import CreateUserForm
 from .operations import *
 from .models import *
+from .mail import *
 from Pure_Beurre.settings import GMAP_KEY
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -199,14 +201,26 @@ def register(request):
         if request.method == "POST":
             form = CreateUserForm(request.POST)
             if form.is_valid():
-                form.save()
                 user = form.cleaned_data.get("username")
-                a_user = User.objects.get(username=user)
-                a_customer = Customer(user_id=a_user.id)
-                a_customer.save()
-                text = "Bienvenue {} !!! Votre compte a bien été créé !!!".format(user)
-                messages.success(request, text)
-                return redirect("login")
+                usermail = form.cleaned_data.get("email")
+
+                user_data = form.save(commit=False)
+                send_confirmation(request, user_data, usermail)
+
+                # form.save() was the native code of version 1.0
+                #form.save()
+
+                #user = form.cleaned_data.get("username")
+
+
+                #a_user = User.objects.get(username=user)
+                #a_customer = Customer(user_id=a_user.id)
+                #a_customer.save()
+
+                return render(request, "registration/validation.html")
+                #text = "Bienvenue {} !!! Votre compte a bien été créé !!!".format(user)
+                #messages.success(request, text)
+                #return redirect("login")
         context = {"form": form}
         return render(request, "registration/register.html", context)
 
@@ -222,3 +236,23 @@ def mentions(request):
     return render(request, "substitute/mentions.html", context)
 
 
+def activate(request, uidb64, token):
+    try:
+        uid = uidb64
+        print("after sending mail, uid = {}".format(uid))
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        print("after sending mail, uid = {}".format(uid))
+        user = User.objects.get(id=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+        print("******************************* user doesn't exist********************************")
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        a_user = User.objects.get(username=user)
+        a_customer = Customer(user_id=a_user.id)
+        a_customer.save()
+        login(request)
+        return render(request, "registration/activation.html")
+    else:
+        return render(request, "registration/failed_activation.html")

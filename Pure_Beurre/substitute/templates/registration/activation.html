@@ -1,0 +1,19 @@
+{% extends 'substitute/base.html'%}
+{% block heart %}
+{% load static %}
+
+<body>
+  <div class="container">
+    <div class="row">
+          <div class="col-12 col-md-12 h1 d-flex justify-content-center font-weight-bold butter-text font-3">Nous avons bien reçu votre confirmation. Vous pouvez désormais vous connecter à votre compte et profiter pleinement du site.</div>
+          <div class="col-12 col-md-12 h1 d-flex justify-content-center font-weight-bold butter-text font-3">Nous vous souhaitons une excellente navigation !!!</div>
+          <div class="col-6 "><a class="navbar-brand d-flex justify-content-center"><img src="{% static 'substitute/png/remy.png' %}" alt="logo de Remy"></a></div>
+          <div class="col-6 "><a class="navbar-brand d-flex justify-content-center"><img src="{% static 'substitute/png/colette-tatou-full.png' %}" alt="logo de colette"></a></div>
+          <br>
+          <br>
+          <div class="col-12 col-md-12 mx-auto font-3"><a href="{% url 'substitute:login' %}">SE CONNECTER</a></div>
+      </div>
+    </div>
+</body>
+
+{% endblock %}
