@@ -221,6 +221,9 @@ def register(request):
                 #text = "Bienvenue {} !!! Votre compte a bien été créé !!!".format(user)
                 #messages.success(request, text)
                 #return redirect("login")
+            else:
+                print("Les informations saisies sont incorrectes !")
+                messages.info(request, "Les informations saisies sont incorrectes !")
         context = {"form": form}
         return render(request, "registration/register.html", context)
 

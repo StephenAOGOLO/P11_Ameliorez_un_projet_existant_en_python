@@ -5,6 +5,9 @@ from django.conf.urls import handler404, handler500
 from django.contrib.auth.models import User
 from django.urls import reverse, resolve
 from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
 from django.test import TestCase, SimpleTestCase, Client
 import os
 
@@ -707,11 +710,17 @@ class TestOperations(TestCase):
 
 
 class TestEmails(TestCase):
+    def setUp(self):
+        self.c = Client()
+        self.a_user = User.objects.create_user(username="a_user", email="a_user@purebeurre.com", password="user.1234")
+
     def test_01_generic_send_email(self):
         print("test_01_generic_send_email")
         mail.send_mail(
-            'objet : Test de django', 'Voici le test de mail django.',
-            'from@example.com', ['to@example.com'],
+            'objet : Test de django',
+            'Voici le test de mail django.',
+            'from@example.com',
+            ['to@example.com'],
             fail_silently=False,
         )
 
@@ -721,6 +730,37 @@ class TestEmails(TestCase):
         # Verify that the subject of the first message is correct.
         self.assertEqual(mail.outbox[0].subject, 'objet : Test de django')
 
-    def test_02_send_confirmation(self):
-        print("test_02_send_confirmation")
+    def test_02_activation_account(self):
+        print("test_02_activation_account")
+        account_activation_token = Tokenizer()
+        content = {"link": "http://purbeurre.test",
+               "user": self.a_user.username,
+               "uid": urlsafe_base64_encode(force_bytes(self.a_user.id)),
+               "token": account_activation_token.make_token(self.a_user)
+               }
+        email = "registration/confirmation.html"
+        email = render_to_string(email, content)
+        mail.send_mail(
+            'objet : Test de django',
+            email,
+            'from@example.com',
+            ['to@example.com'],
+            fail_silently=False,
+        )
+
+        # Test that one message has been sent.
+        self.assertEqual(len(mail.outbox), 1)
+
+        # Verify that the subject of the first message is correct.
+        self.assertEqual(mail.outbox[0].subject, 'objet : Test de django')
+
+        # Verify that the mail content is correct.
+        self.assertEqual(mail.outbox[0].body, email)
+
+        # Verify that the activation key is present.
+        if urlsafe_base64_encode(force_bytes(self.a_user.id)) in mail.outbox[0].body:
+            print("La cle d'authentification est bien presente dans le courrier electronique d'activation. Test OK.")
+        else:
+            print("La cle d'authentification n'est pas presente dans le courrier electronique d'activation. Test KO.")
+
 

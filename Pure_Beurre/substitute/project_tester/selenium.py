@@ -184,6 +184,67 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         self.assertEqual(self.selenium.current_url, self.an_aliment.url)
         self.selenium.back()
 
+    def test_07_account_activation(self):
+        print("\nACCOUNT ACTIVATION\n")
+        self.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
+        self.another_user_clear_password = "anotherselenium.1234"
+        time.sleep(2)
+        main_url = self.live_server_url
+        self.selenium.find_element_by_class_name("login").click()
+        time.sleep(2)
+        self.assertEqual(
+            self.selenium.current_url,
+            main_url + reverse("substitute:login")
+        )
+        self.selenium.find_element_by_id("create_account").click()
+        self.assertEqual(
+            self.selenium.current_url,
+            main_url + reverse("substitute:register")
+        )
+        time.sleep(2)
+        username_input = self.selenium.find_element_by_id("id_username")
+        username_input.send_keys("another")
+        time.sleep(2)
+        username_input = self.selenium.find_element_by_id("id_email")
+        username_input.send_keys("another_chrome_user@purebeurre.com")
+        time.sleep(2)
+        username_input = self.selenium.find_element_by_id("id_password1")
+        username_input.send_keys(self.another_user_clear_password)
+        time.sleep(2)
+        username_input = self.selenium.find_element_by_id("id_password2")
+        username_input.send_keys(self.another_user_clear_password)
+        time.sleep(2)
+        self.selenium.find_element_by_id("button-create").click()
+        time.sleep(2)
+        first_activate_msg = self.selenium.find_element_by_id("first-activate-msg").text
+        second_activate_msg = self.selenium.find_element_by_id("second-activate-msg").text
+        self.assertEqual(
+            first_activate_msg,
+            "Nous vous avons envoyé un E-mail d'activation."
+        )
+        self.assertEqual(
+            second_activate_msg,
+            'Merci de Verifier et cliquer sur le lien "ACTIVER MON COMPTE"'
+        )
+        time.sleep(2)
+        #self.selenium.find_element_by_id("back-home").click()
+
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
     @classmethod
@@ -290,5 +351,6 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
         print("\nTEARDOWN\n")
         cls.selenium.quit()
         super().tearDownClass()
+
 
 

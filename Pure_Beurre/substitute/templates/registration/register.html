@@ -9,6 +9,9 @@
         <div class="col-12"> <br/></div>
         <div class="note">
             <p>Création de compte</p>
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
         </div>
         <div class="form-content">
             <div class="row">
@@ -36,7 +39,7 @@
                         </div>
                     </div>
             </div>
-        <button type="submit" class="btnSubmit">Création de compte</button>
+        <button type="submit" id="button-create" class="btnSubmit">Création de compte</button>
         </div>
     </div>
 </div>

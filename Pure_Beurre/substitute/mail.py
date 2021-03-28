@@ -55,6 +55,7 @@ def set_confirmation(request, user, template):
     print("before sending mail, uid = {}".format(uid))
     return confirmation
 
+
 class Tokenizer(PasswordResetTokenGenerator):
     def _make_hash_value(self, user, timestamp):
         login_timestamp = '' if user.last_login is None else user.last_login.replace(microsecond=0, tzinfo=None)
