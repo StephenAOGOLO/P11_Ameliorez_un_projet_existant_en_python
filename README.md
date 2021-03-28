@@ -62,6 +62,9 @@ Ces commits proviennent uniquement de la branche '1.2_staging', branche concern√
     - Build #19 : Passed - commit 06d6e14 : HomePage Updating Story links
     - Build #20 : Failed - commit 96f4dd8 : ResultPage Testing Pictures links
     - Build #21 : Passed - commit 5f36399 : ResultPage Updating Pictures links
+    - Build #22 : Failed - commit  a778598 : ResultPage Testing Visualization stores
+    - Build #23 : Failed - commit 574ed05 : AccountPage Testing Activation account
+    - Build #24 : Passed - commit 9f48d7a : ResultPage and AccountPage for Visualization stores and Activation account
 
 
 # Auteur
