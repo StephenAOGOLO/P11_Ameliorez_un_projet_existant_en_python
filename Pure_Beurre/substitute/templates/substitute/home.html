@@ -1,0 +1,77 @@
+{% extends 'substitute/base.html'%}
+{% block heart %}
+{% load static %}
+<style type="text/css">
+    .search-area
+    {
+        background: url('{% static "substitute/jpg/remy_welcome.jpg" %}');
+        background-size: cover;
+        height: 100%;
+    }
+    @media (min-width: 950px)
+    {
+        .home-back
+            {
+                background: url('{% static "substitute/jpg/remy_welcome.jpg" %}');
+                background-size: cover;
+                filter: blur(0);
+                height: 100%;
+            }
+    }
+</style>
+<div class="container-fluid border home-container home-back" >
+    <div class="row container-fluid search-area">
+        <div class="col-12">
+            <div class="col-12"> <br/></div>
+            <div class="col-sm-12 col-12 h1 d-flex justify-content-center font-weight-bold butter-text font-4">Du gras, oui, mais de qualité !</div>
+            <div class="col-12"> <br/></div>
+            <div class="home-container">
+            <div class="col-4 h2 d-flex justify-content-center butter-text bold-text">
+                <p>
+                    {{ goal }}
+                </p>
+            </div>
+            </div>
+            <div class="col-12 d-flex justify-content-center" >
+            <form method="POST" class="form-inline my-2 my-lg-0">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2 font-weight-bold" id="home-searchbar" size="100" type="search" name="product" placeholder="produit " aria-label="Chercher">
+                <button class="btn btn-elegant btn-rounded btn-butter my-2 my-sm-0" id="button-searchbar" type="submit">Chercher</button>
+            </form>
+        </div>
+        <div class="col-12 d-flex justify-content-center alert-text bold-text font-3" >
+            {% for message in messages %}
+                <br/>{{ message }}<br/>
+            {% endfor %}
+        </div>
+        <div class="col-12"> <br/></div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid border" id="story-area">
+    <div class="row">
+        <div class="col-12"> <br/></div>
+        <div class="col-12 h2 d-flex justify-content-center">Colette et Remy</div>
+        <div class="col-12"> <br/></div>
+        <div class="col-12 h3 d-flex justify-content-center">{{ text.home_s }}</div>
+        <div class="col-12 col-md-6"><a id="colette-story" href="{{ colette_story }}"><img src="{% static 'substitute/png/colette-tatou-full.png' %}" alt="Photo de Colette"></a></div>
+        <div class="col-12 col-md-6"><a id="remy-story" href="{{ remy_story }}"><img src="{% static 'substitute/png/remy.png' %}" alt="Photo de Remy"></a></div>
+        <div class="col-12"> <br/></div>
+    </div>
+</div>
+<div class="container-fluid border" id="contactus-area">
+    <div class="row">
+        <div class="col-12"> <br/></div>
+        <div class="col-12 h2">Contactez - nous !</div>
+        <div class="col-12"> <br/></div>
+        <div class="col-12 h3">{{ text.home_c }}</div>
+        <div class="col-12"> <br/></div>
+        <div class="col-12"> <br/></div>
+        <div class="col-12 col-md-6 h3"><input type="image" height="50" width="50" alt="Boutton - telephone"  src="{% static 'substitute/png/telephone.png' %}" /></div>
+        <div class="col-12 col-md-6 h3"><input type="image" height="50" width="50" alt="Boutton - email"  src="{% static 'substitute/png/mail.png' %}" /></div>
+        <div class="col-12 col-md-6 h3"> 01.02.03.04.05 </div>
+        <div class="col-12 col-md-6 h3"> contact@purebeurre.fr </div>
+        <div class="col-12"> <br/></div>
+    </div>
+</div>
+{% endblock %}

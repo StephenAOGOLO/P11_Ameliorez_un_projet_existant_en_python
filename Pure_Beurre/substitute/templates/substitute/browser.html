@@ -1,0 +1,35 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'substitute:home' %}"><img src="{% static 'substitute/png/logo_pb_min.png' %}" alt="logo de Pur Beurre"></a>
+  <a class="navbar-brand" href="{% url 'substitute:home' %}" id="version_tag"><h3> Pur Beurre </h3><h4>{{ version_tag }}</h4></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <form method="POST" class="form-inline my-2 my-lg-0">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" name="browser_product" size="40" placeholder="produit " aria-label="Chercher">
+      </form>
+      {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="navbar-brand" href="{% url 'substitute:login' %}">
+            <input type="image" height="50" width="50" alt="Boutton - mon compte"  src="{% static 'substitute/png/green_user_sticker.png' %}" />
+          </a>
+        </li>
+        <li class="nav-item">
+        <a class="navbar-brand" href="{% url 'substitute:historic' %}"><input type="image" height="50" width="50" alt="Boutton - Mes Aliments"  src="{% static 'substitute/png/colored_carott_sticker.png' %}" /></a>
+      </li>
+          {% else %}
+        <li class="nav-item">
+          <a class="navbar-brand login" href="{% url 'substitute:login' %}">
+          <input type="image" height="50" width="50" alt="Boutton - Créer mon compte"  src="{% static 'substitute/png/black_user_sticker_new.png' %}" />
+        </a>
+        </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="navbar-brand logout" href="{% url 'substitute:logout' %}"><input type="image" height="50" width="50" alt="Boutton - Déconnexion"  src="{% static 'substitute/png/disconnect_sticker.png' %}" /></a>
+      </li>
+    </ul>
+    </div>
+</nav>

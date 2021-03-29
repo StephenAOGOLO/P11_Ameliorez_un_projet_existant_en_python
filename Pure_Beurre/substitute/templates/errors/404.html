@@ -1,0 +1,11 @@
+{% extends 'substitute/base.html'%}
+{% block heart %}
+{% load static %}
+    <div id="404-area">
+        <h1>Cette page est introuvable !!!!</h1>
+        <h2>(404)</h2>
+        <h3>
+            Cliquez ici pour retourner à <a href="{% url 'substitute:home' %}"> {{ data }} </a>
+        </h3>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+# created by virtualenv automatically
+/.idea
+/venv
+/pyvenv.cfg
+/Lib
+/Scripts
+/auto_install.bat
+biscuit.png
+Cahier_des_charges.pdf
+/starter.bat
+/Pure_Beurre/.coverage
+/requirements_auto.txt
+/Pure_Beurre/Pure_Beurre/debug_settings.py
+
