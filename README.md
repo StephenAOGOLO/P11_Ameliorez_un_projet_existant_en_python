@@ -66,6 +66,11 @@ Ces commits proviennent uniquement de la branche '1.2_staging', branche concern�
     - Build #23 : Failed - commit 574ed05 : AccountPage Testing Activation account
     - Build #24 : Passed - commit 9f48d7a : ResultPage and AccountPage for Visualization stores and Activation account
 
+# Hébergement
+[Le site Pur Beurre](http://206.189.30.229/substitute/home/) est hébergé chez Digital Ocean.  
+
+# Supervision
+Les logs du site sont disponible sur [SENTRY](https://sentry.io/organizations/stephen-aogolo/issues/?project=5631401)
 
 # Auteur
 Stephen A.OGOLO
