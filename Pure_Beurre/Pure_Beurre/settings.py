@@ -213,10 +213,10 @@ else:
 
     elif platform.uname().node == 'django-s-1vcpu-1gb-lon1-01':
         # SMTP prod Configuration
-        EMAIL_BACKEND = ""
-        EMAIL_HOST = ""
+        EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+        EMAIL_HOST = "smtp.gmail.com"
         EMAIL_PORT = 587
         EMAIL_USE_TLS = True
-        EMAIL_HOST_USER = ""
-        EMAIL_HOST_PASSWORD = ""
+        EMAIL_HOST_USER = "devdjangotest@gmail.com"
+        EMAIL_HOST_PASSWORD = "devdjangotest.1234"
 
