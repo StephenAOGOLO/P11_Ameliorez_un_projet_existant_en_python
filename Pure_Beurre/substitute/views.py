@@ -7,6 +7,7 @@ from django.contrib import messages
 from pathlib import Path
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
+from django.db import IntegrityError
 
 # Create your views here.
 from .forms import CreateUserForm
@@ -249,13 +250,19 @@ def activate(request, uidb64, token):
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
         print("******************************* user doesn't exist********************************")
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        a_user = User.objects.get(username=user)
-        a_customer = Customer(user_id=a_user.id)
-        a_customer.save()
-        login(request)
+    try:
+        if user is not None and account_activation_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            a_user = User.objects.get(username=user)
+            a_customer = Customer(user_id=a_user.id)
+            a_customer.save()
+            login(request)
+            return render(request, "registration/activation.html")
+        else:
+            return render(request, "registration/failed_activation.html")
+    except IntegrityError as e:
+        print(e)
         return render(request, "registration/activation.html")
-    else:
-        return render(request, "registration/failed_activation.html")
+
+
