@@ -251,9 +251,7 @@ def activate(request, uidb64, token):
         print("******************************* user doesn't exist********************************")
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
-        import time
-        time.sleep(2)
-        user.save()
+        #user.save()
         a_user = User.objects.get(username=user)
         a_customer = Customer(user_id=a_user.id)
         a_customer.save()
