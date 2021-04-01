@@ -1,3 +1,4 @@
+""" This module handles all the views of the application. """
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
@@ -20,20 +21,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def handler404(request, exception=None):
+    """ This function takes care of 404 errors.
+     When a 404 error occurs, the '404.html' is displayed."""
     page = "acceuil"
     return render(request, "errors/404.html", {"data": page}, status=404)
 
 
 def handler500(request, exception=None):
+    """ This function takes care of 500 errors.
+     When a 404 error occurs, the '500.html' is displayed."""
     page = "acceuil"
     return render(request, "errors/500.html", {"data": page}, status=500)
 
 
 def index(request):
+    """ This function is a shortcut-like view to the homepge view. """
     return homepage(request)
 
 
 def search(request, product):
+    """ This function is the twin view of homepage().
+    It's called to handle the seek of products.
+    It is composed of a error handler to secure the user entries."""
     if "browser_product" in request.POST:
         browser_product = request.POST.get("browser_product")
         print(browser_product)
@@ -57,6 +66,8 @@ def search(request, product):
 
 
 def homepage(request):
+    """ This function is the main view of the application. It's rendering the homepage 'home.html',
+      where the user can search products or just read contents."""
     home_text = open_js_file(os.path.join(BASE_DIR, "substitute/static/substitute/json/text.json"))
     text = get_text()
     context = {"text": text,
@@ -82,6 +93,8 @@ def homepage(request):
 
 
 def save(request, p_id, s_id, u_id):
+    """ This function is called to catch product,
+     substitute and user id's before launch a record of swap. """
     if "browser_product" in request.POST:
         browser_product = request.POST.get("browser_product")
         print(browser_product)
@@ -103,6 +116,7 @@ def save(request, p_id, s_id, u_id):
 
 
 def aliment(request, p_id, s_id, u_id):
+    """ This function is called to get more details on a product. """
     if "browser_product" in request.POST:
         browser_product = request.POST.get("browser_product")
         print(browser_product)
@@ -135,6 +149,7 @@ def aliment(request, p_id, s_id, u_id):
 
 
 def account(request):
+    """ This function handles account user. """
     if "browser_product" in request.POST:
         browser_product = request.POST.get("browser_product")
         print(browser_product)
@@ -147,6 +162,7 @@ def account(request):
 
 
 def historic(request):
+    """ This function handles historic user. """
     if "browser_product" in request.POST:
         browser_product = request.POST.get("browser_product")
         print(browser_product)
@@ -165,6 +181,9 @@ def historic(request):
 
 
 def login(request):
+    """ This function drives the user
+     to the login page or the account page,
+      depending on authentication status. """
     if "browser_product" in request.POST:
         browser_product = request.POST.get("browser_product")
         print(browser_product)
@@ -186,11 +205,16 @@ def login(request):
 
 
 def logout(request):
+    """ This function redirects
+     user to homepage() after log out. """
     lgo(request)
     return redirect("/substitute/home")
 
 
 def register(request):
+    """ This function drives the user
+     to the register page or the account page,
+    depending on authentication status. """
     if "browser_product" in request.POST:
         browser_product = request.POST.get("browser_product")
         print(browser_product)
@@ -203,25 +227,10 @@ def register(request):
             form = CreateUserForm(request.POST)
             if form.is_valid():
                 user = form.cleaned_data.get("username")
-                usermail = form.cleaned_data.get("email")
-
+                user_mail = form.cleaned_data.get("email")
                 user_data = form.save(commit=False)
-                send_confirmation(request, user_data, usermail)
-
-                # form.save() was the native code of version 1.0
-                #form.save()
-
-                #user = form.cleaned_data.get("username")
-
-
-                #a_user = User.objects.get(username=user)
-                #a_customer = Customer(user_id=a_user.id)
-                #a_customer.save()
-
+                send_confirmation(request, user_data, user_mail)
                 return render(request, "registration/validation.html")
-                #text = "Bienvenue {} !!! Votre compte a bien été créé !!!".format(user)
-                #messages.success(request, text)
-                #return redirect("login")
             else:
                 print("Les informations saisies sont incorrectes !")
                 messages.info(request, "Les informations saisies sont incorrectes !")
@@ -230,17 +239,21 @@ def register(request):
 
 
 def is_user_authenticate(request):
+    """ This function redirects user if authenticated. """
     if request.user.is_authenticated:
         return redirect("/substitute/account")
 
 
 def mentions(request):
+    """ This function rendering mentions.html with the text stored in the website database.  """
     text = get_text()
     context = {"text": text}
     return render(request, "substitute/mentions.html", context)
 
 
 def activate(request, uidb64, token):
+    """ This function is called by clicking on the activation account link from the received mail.
+     It is called to activate the concerned user token verification."""
     try:
         uid = uidb64
         print("after sending mail, uid = {}".format(uid))
@@ -264,5 +277,3 @@ def activate(request, uidb64, token):
     except IntegrityError as e:
         print(e)
         return render(request, "registration/activation.html")
-
-

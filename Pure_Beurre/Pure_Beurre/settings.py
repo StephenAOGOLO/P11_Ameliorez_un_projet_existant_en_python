@@ -198,8 +198,8 @@ if DEBUG:
     EMAIL_HOST = "smtp.gmail.com"
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = "devdjangotest@gmail.com"
-    EMAIL_HOST_PASSWORD = "devdjangotest.1234"
+    EMAIL_HOST_USER = tst.EHU
+    EMAIL_HOST_PASSWORD = tst.EHP
 
 else:
     if 'travis' in platform.uname().node:
@@ -217,6 +217,5 @@ else:
         EMAIL_HOST = "smtp.gmail.com"
         EMAIL_PORT = 587
         EMAIL_USE_TLS = True
-        EMAIL_HOST_USER = "devdjangotest@gmail.com"
-        EMAIL_HOST_PASSWORD = "devdjangotest.1234"
-
+        EMAIL_HOST_USER = tst.EHU
+        EMAIL_HOST_PASSWORD = tst.EHP

@@ -16,21 +16,6 @@
             <a class="btn btn-lg btn-create-account btn-block text-uppercase bg-butter" href="{{ product.url }}">
             <div>{{ product.brand }} {{ product.name }}</div>
                 <div><img src="{{ product_nutriscore }}" alt="Nutriscore"></div>
-                <!--
-                {{ comment }}
-                {% if product.nutriscore == "a" %}
-                <div><img src="{% static 'substitute/png/a_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% elif product.nutriscore == "b" %}
-                <div><img src="{% static 'substitute/png/b_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% elif product.nutriscore == "c" %}
-                <div><img src="{% static 'substitute/png/c_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% elif product.nutriscore == "d" %}
-                <div><img src="{% static 'substitute/png/d_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% elif product.nutriscore == "e" %}
-                <div><img src="{% static 'substitute/png/e_nutriscore_good.png' %}" alt="Photo de Colette"></div>
-                {% endif %}
-                {{ endcomment }}
-                -->
                 </a>
         </div>
         <div class="col-12"><br/></div>
@@ -60,7 +45,6 @@
                             <div class="col-6 col-md-6 h3"><img height="20" width="20" alt="Boutton - disquette"  src="{% static 'substitute/png/blue_save.png' %}"></div>
                             <div class="col-6 col-md-6 h3">Sauvegarder</div>
                         </a>
-
                         {% else %}
                         <a href="{% url 'substitute:login' %}">
                             <div class="col-1 col-md-1 h3">

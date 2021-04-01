@@ -100,13 +100,20 @@ class Data:
 
 
 class DataSearch:
+    """ This class is called for search direct and indirect product from a user entry.
+     It provides dict big data as result."""
     def __init__(self, raw_data):
+        """ The instance is created from the user entry 'raw_data'.
+        Then get_direct_aliment() and get_indirect_aliment() methods
+        are called to provide their result. """
         self.raw_data = raw_data
         self.direct_aliment = self.get_direct_aliment()
         self.indirect_aliment = self.get_indirect_aliment()
         self.big_data = self.build_big_data()
 
     def get_direct_aliment(self):
+        """ This method is called to search into the website database
+         all products which contain the user entry into the product name. """
         direct_aliment = {}
         aliments = Aliment.objects.filter(name__icontains=self.raw_data)
         for e in aliments:
@@ -114,6 +121,8 @@ class DataSearch:
         return direct_aliment
 
     def get_indirect_aliment(self):
+        """ This method is called to search into the website database
+         all products which contain the user entry into the category name from every product. """
         indirect_aliment = {}
         aliments = []
         categories = Category.objects.filter(name__icontains=self.raw_data)
@@ -126,6 +135,7 @@ class DataSearch:
         return indirect_aliment
 
     def build_big_data(self):
+        """ This method joins the both method results and provides it into a dict.  """
         big_data = {}
         big_data = self.direct_aliment
         big_data.update(self.indirect_aliment)
@@ -134,26 +144,30 @@ class DataSearch:
 
 
 class DataSave:
+    """ This class is called to create a historic's record. """
     def __init__(self, aliment, substitute, customer):
         self.aliment = aliment
         self.substitute = substitute
         self.customer = customer
 
     def store_data(self):
+        """ This method create a historic swap and save it into the website database. """
         the_historic = HistoricValue(self.aliment, self.substitute, self.customer)
         the_historic.store_items()
 
 
 class DataAliment:
+    """ This class is called to search and provide a product from the website database. """
     def __init__(self, pk):
+        """ The instance needs the primary key to search and provide the product. """
         self.aliment_id = pk
         self.aliment = self.get_aliment()
 
     def get_aliment(self):
+        """ This method searches into the website database and provides the Aliment model instance.  """
         aliment = Aliment.objects.get(id=self.aliment_id)
         print(aliment)
         return aliment
-
 
 
 def open_js_file(js_file):
@@ -187,6 +201,7 @@ def secure_text(text, js_file="/static/substitute/json/xss.json"):
 
 
 def get_historic(customer):
+    """ This function returns all the records concerning a customer. """
     the_historic = Historic.objects.filter(user_id=customer.id)
     for e in the_historic:
         e.aliment.nutriscore = set_nutriscore_tag(e.aliment.nutriscore)
@@ -195,6 +210,7 @@ def get_historic(customer):
 
 
 def sort_big_data(big_data):
+    """ This function sorts a dict by the nutriscore criteria. """
     new_data = sorted(big_data.items(), key=lambda t: t[1].nutriscore)
     big_data = {}
     for e in new_data:
@@ -203,6 +219,7 @@ def sort_big_data(big_data):
 
 
 def formatting_data(data):
+    """ This function deleting all incomplete data coming from openfoodfacts servers. """
     print("\nMise en forme des données collectées...")
     data = formatting_aliments(data)
     data = formatting_categories(data)
@@ -212,6 +229,7 @@ def formatting_data(data):
 
 
 def cleaning_categories(data):
+    """ This function deleting all incomplete categories'data coming from openfoodfacts servers. """
     cleaner = data["rcvd"]["essentials"]["aliments"]
     cleaned = data["rcvd"]["essentials"]["categories"]
     list_big = []
@@ -233,8 +251,8 @@ def cleaning_categories(data):
     return data
 
 
-
 def formatting_categories(data):
+    """ This function formatting all categories'data coming from openfoodfacts servers. """
     for i, e in enumerate(data["rcvd"]["categories"]):
         categories = {}
         check_data = "known"
@@ -247,6 +265,7 @@ def formatting_categories(data):
 
 
 def formatting_aliments(data):
+    """ This function formatting all aliments'data coming from openfoodfacts servers. """
     aliments = {}
     for k, v in data["rcvd"]["aliments"].items():
         data["rcvd"]["essentials"]["aliments"][k] = {}
@@ -275,6 +294,7 @@ def formatting_aliments(data):
 
 
 def get_data(data):
+    """ This function prepares the internal big data. """
     data["rcvd"]["essentials"] = {}
     data["rcvd"]["essentials"]["aliments"] = {}
     data["rcvd"]["essentials"]["categories"] = {}
@@ -282,11 +302,13 @@ def get_data(data):
 
 
 def set_nutriscore_tag(tag):
+    """ This function returns a nutriscore picture from his tag value. """
     new_tag = '/static/substitute/png/{}_nutriscore_good.png'.format(tag)
     return new_tag
 
 
-def fill_category(data,):
+def fill_category(data):
+    """ This function is called to fill the website database. The target table is Category model. """
     for k, v in data["cleaned_categories"].items():
         id_name = v["id"]
         name = v["name"]
@@ -300,6 +322,7 @@ def fill_category(data,):
 
 
 def fill_aliment(data):
+    """ This function is called to fill the website database. The target table is Aliment model. """
     for k, v in data["rcvd"]["essentials"]["aliments"].items():
         for k_1, v_1 in v.items():
             try:
@@ -335,7 +358,9 @@ def fill_aliment(data):
             except Exception as e:
                 print(e)
 
+
 def fill_text():
+    """ This function is called to fill the website database. The target table is Text model. """
     basedir = os.path.abspath(os.path.dirname(__file__))
     js_file = "/static/substitute/json/text.json"
     js_file = basedir + js_file
@@ -363,11 +388,15 @@ def fill_text():
 
 
 def get_text(lang="fr"):
+    """ This function is called to return text content website.
+     WARNING !!! ONLY THE FRENCH LANGUAGE IS AVAILABLE ON Pur Beurre 1.1."""
     text = Text.objects.get(language=lang)
     return text
 
 
 def gmap_builder(stores, purchase_places):
+    """ This function is called to returns latitude and longitude of a given place
+     by contacting Google API """
     gmap_book = {}
     for i, e in enumerate(stores):
         for x, y in enumerate(purchase_places):
@@ -377,25 +406,19 @@ def gmap_builder(stores, purchase_places):
             url += target
             response = requests.get(url)
             response = json.loads(response.content.decode("utf-8"))
-            book = gmap_seeker(e, y, response)
+            book = gmap_seeker(response)
             gmap_book[str(e)+"_"+str(y)] = book
     return book
 
 
-def gmap_seeker(store, pp, response):
+def gmap_seeker(response):
+    """ This function is called to precisely provide latitude and longitude
+     stored into a given Dict()"""
     book = {}
     results = response.get("results")
     for i_1, e_1 in enumerate(results):
-        info = {}
         place_id = e_1.get("place_id")
         location = e_1.get("geometry").get("location")
-        #info["store"] = store
-        #info["pp"] = pp
-        #info["place_id"] = place_id
-        #info["location"] = location
-        #book[place_id] = {"info": info,
-        #                  "location": location
-        #                  }
         book[str(place_id)] = {
             "lat": str(location["lat"]),
             "lng": str(location["lng"])
@@ -404,6 +427,8 @@ def gmap_seeker(store, pp, response):
 
 
 def average_location(book):
+    """ This function is called to provide an average value from a range of locations.
+      This average is used for centralize Gmap window."""
     all_lat = 0
     all_lng = 0
     count = 0
@@ -419,5 +444,3 @@ def average_location(book):
     av_lng = (all_lng/count)
     book_average = {"av_lat": str(av_lat), "av_lng": str(av_lng)}
     return book_average
-
-
