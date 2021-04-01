@@ -25,16 +25,16 @@
 
     Dona Jimena
 
-# Contexte du projet
+# Contexte du projet  
 La plateforme PurBeurre a été sélectionné en tant que base du projet.  
 Rappel : Voici [le cahier des charges](/Readme/Cahier_des_charges.pdf) sur lequel s'appuie la plateforme PurBeurre.  
 
-# Organisation du projet
+# Organisation du projet  
 Ce projet est réalisé selon une méthodologie agile.  
 Sa planification est disponible via ce [Trello](https://trello.com/invite/b/SYTimIfb/142082c5c7aaaf9c6b1b187ef790e314/p11ameliorezunprojetexistantavecpython).  
 
-# Version du projet
-Plateforme web - PurBeurre : 1.2
+# Version du projet  
+Plateforme web - PurBeurre : 1.2  
 
     - Langage de programmation : Python 3.8
     - Framework : Django 3.1.2
@@ -44,7 +44,7 @@ Plateforme web - PurBeurre : 1.2
     - Hébergeur : Digital Ocean
 
 # Intégration Continue  
-A chaque modification du projet, ajout de nouvelles fonctionnalités ou de corrections,  
+A chaque modification du projet, ajout de nouvelles fonctionnalités ou de correction,  
 le projet est envoyé sur la branche [1.2_stagging](https://github.com/StephenAOGOLO/P10_Deployez_votre_application_sur_un_serveur/tree/1.2_staging). C'est à ce niveau que le service Travis entre en fonction.  
 Ce service cree un environnement éphémère de production, proche de l'environnement du serveur hébergé.  
 Il exécute deux campagnes de tests. Une campagne de tests unitaires/fonctionnels et une campagne de tests d'intégration.
@@ -62,11 +62,23 @@ Ces commits proviennent uniquement de la branche '1.2_staging', branche concern�
     - Build #19 : Passed - commit 06d6e14 : HomePage Updating Story links
     - Build #20 : Failed - commit 96f4dd8 : ResultPage Testing Pictures links
     - Build #21 : Passed - commit 5f36399 : ResultPage Updating Pictures links
+    - Build #22 : Failed - commit  a778598 : ResultPage Testing Visualization stores
+    - Build #23 : Failed - commit 574ed05 : AccountPage Testing Activation account
+    - Build #24 : Passed - commit 9f48d7a : ResultPage and AccountPage for Visualization stores and Activation account
 
 
-# Auteur
-Stephen A.OGOLO
+# Hébergement  
+Suite à l'intégration continue, la version finale du projet est envoyé sur la branche MASTER.  
+Le déploiement peut donc avoir lieu.  
+ 
+[Le site Pur Beurre](http://206.189.30.229/substitute/home/) est hébergé chez Digital Ocean.  
 
-# Remerciements
+# Supervision
+Les logs d'exécution du site sont disponibles en ligne sur [SENTRY](https://sentry.io/organizations/stephen-aogolo/issues/?project=5631401)  
+
+# Auteur  
+Stephen A.OGOLO  
+
+# Remerciements  
 Merci pour cette lecture et pour l'attention portée à ces informations.  
-Bonne utilisation !
+Bonne utilisation !  

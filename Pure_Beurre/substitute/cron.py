@@ -1,3 +1,4 @@
+""" This module is called to execute automatically its internal functions  """
 from django.core.management import call_command
 from pathlib import Path
 import time, os
@@ -5,7 +6,14 @@ import time, os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 def cyclic_dbupdate():
+    """
+    This function runs the following actions:
+            - To display operating system details
+            - To display the total quantity of aliments
+            - To fill database by lauching 'fillDB' manage.py command
+    """
     try:
         now = time.localtime()
         when_happens = "{}-{}-{}_{}-{}-{}".format(now[0], now[1], now[2], now[3], now[4], now[5])
@@ -25,6 +33,9 @@ def cyclic_dbupdate():
 
 
 def log_it(path_log="./CRON_LOGS/", filename="cron_event", extension="txt", content=None):
+    """ This function is called provide all data events comming from the DB update.
+     These data are put into a logfile.
+     """
     if content is None:
         content = ["vide\n"]
     os.makedirs(path_log, exist_ok=True)
@@ -40,6 +51,7 @@ def log_it(path_log="./CRON_LOGS/", filename="cron_event", extension="txt", cont
 
 
 def log_content(start_time, stop_time, event):
+    """ this function is called to mark time on a event.
+     It returns a string."""
     event += "\n"
     return [start_time + " : Debut de " + event, stop_time + " : Fin de " + event]
-

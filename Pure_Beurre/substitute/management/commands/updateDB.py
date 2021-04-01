@@ -1,3 +1,5 @@
+""" This module is a manage.py command
+ used for update the website database.  """
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from pathlib import Path
@@ -6,12 +8,19 @@ import time, os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 class Command(BaseCommand):
+    """ This class is getting ready the user """
     print("\n")
     print("=" * 150)
     print("Préparation de la mise à jour automatique")
 
     def handle(self, *args, **options):
+        """  This method runs the following actions:
+            - To display operating system details
+            - To display the total quantity of aliments
+            - To update database
+        """
         self.stdout.write(self.style.SUCCESS("Lancement de la mise à jour automatique..."))
         try:
             call_command('environs')
@@ -27,8 +36,6 @@ class Command(BaseCommand):
             stop_time = when_happens
             print("Fin de la mise à jour cyclique de la base de données...")
             print("Opération terminée à : {}".format(when_happens))
-            #content = log_content(start_time, stop_time, "Mise a jour de la base de donnees")
-            #log_it(content=content)
             call_command('all_aliments')
         except Exception as e:
             print(e)

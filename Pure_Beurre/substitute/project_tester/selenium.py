@@ -1,3 +1,4 @@
+""" This module test some behaviour during website use. """
 from django.urls import reverse
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver as wdc
@@ -11,8 +12,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class SeleniumTestsChrome(StaticLiveServerTestCase):
+    """ This test class launches dynamics tests on Chrome browser """
     @classmethod
     def setUpClass(cls):
+        """ This method prepares the initial test environment.
+        It creates the following instances :
+            - Users
+            - Customers """
         print("\nSETUP\n")
         super().setUpClass()
         cls.text_page = Text.objects.create(
@@ -62,11 +68,13 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls):
+        """ This method stops the dynamic test """
         print("\nTEARDOWN\n")
         cls.selenium.quit()
         super().tearDownClass()
 
     def test_02_logout(self):
+        """ This method checks if by clicking on 'logout' button, user is redirected to 'home' page.  """
         print("\nLOGOUT\n")
         time.sleep(2)
         self.text_page = Text.objects.create(
@@ -96,6 +104,8 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         )
 
     def test_01_login(self):
+        """ This method checks if by clicking on 'login' button, user is redirected to 'login' page.
+          - By filling username and password corectly then clicking on 'connect', user is redirected to 'account' page."""
         print("\nLOGIN\n")
         time.sleep(2)
         main_url = self.live_server_url
@@ -120,6 +130,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         )
 
     def test_03_version(self):
+        """ This method checks the version tag on homepage """
         print("\nVERSION\n")
         time.sleep(2)
         current_tag = self.selenium.find_element_by_id("version_tag")
@@ -128,6 +139,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         self.assertEqual(self.stored_version, current_version)
 
     def test_04_colette_story(self):
+        """ This method checks the correct redirection """
         print("\nCOLETTE STORY\n")
         time.sleep(2)
         self.selenium.find_element_by_id("colette-story").click()
@@ -137,6 +149,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         self.selenium.back()
 
     def test_05_remy_story(self):
+        """ This method checks the correct redirection """
         print("\nREMY STORY\n")
         time.sleep(2)
         self.selenium.find_element_by_id("remy-story").click()
@@ -146,6 +159,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         self.selenium.back()
 
     def test_06_product_picture(self):
+        """ This method checks the correct redirection """
         print("\nPRODUCT PICTURE\n")
         self.text_page = Text.objects.create(
             language="fr",
@@ -185,6 +199,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         self.selenium.back()
 
     def test_07_account_activation(self):
+        """ This method checks the correct redirection """
         print("\nACCOUNT ACTIVATION\n")
         self.text_page = Text.objects.create(
             language="fr",
@@ -243,12 +258,13 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             'Merci de Verifier et cliquer sur le lien "ACTIVER MON COMPTE"'
         )
         time.sleep(2)
-        #self.selenium.find_element_by_id("back-home").click()
 
 
 class SeleniumTestsError404(StaticLiveServerTestCase):
+    """ This test class launches dynamics tests on Chrome browser """
     @classmethod
     def setUpClass(cls):
+        """ This method prepares the initial test environment."""
         print("\nSETUP\n")
         super().setUpClass()
         cls.text_page = Text(
@@ -289,11 +305,13 @@ class SeleniumTestsError404(StaticLiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls):
+        """ This method stops the dynamic test """
         print("\nTEARDOWN\n")
         cls.selenium.quit()
         super().tearDownClass()
 
     def test_404(self):
+        """ This method checks if the correct message is diplayed after 404 error. """
         print("\nTEST 404\n")
         time.sleep(2)
         alert = self.selenium.find_element_by_id("404-area")
@@ -302,8 +320,13 @@ class SeleniumTestsError404(StaticLiveServerTestCase):
 
 
 class SeleniumTestsError500(StaticLiveServerTestCase):
+    """ This test class launches dynamics tests on Chrome browser """
     @classmethod
     def setUpClass(cls):
+        """ This method prepares the initial test environment.
+                    It creates the following instances :
+                    - Users
+        """
         print("\nSETUP\n")
         super().setUpClass()
         cls.text_page = Text(
@@ -348,9 +371,7 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls):
+        """ This method stops the dynamic test """
         print("\nTEARDOWN\n")
         cls.selenium.quit()
         super().tearDownClass()
-
-
-
