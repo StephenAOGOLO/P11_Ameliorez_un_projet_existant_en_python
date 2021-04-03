@@ -67,6 +67,12 @@ Ces commits proviennent uniquement de la branche '1.2_staging', branche concern�
     - Build #24 : Passed - commit 9f48d7a : ResultPage and AccountPage for Visualization stores and Activation account
 
 
+# Rapport de couverture des tests
+Concernant la couverture des tests, elle est de 91%.  
+Pour plus d'information, merci de consulter la page [index.html](https://github.com/StephenAOGOLO/P11_Ameliorez_un_projet_existant_en_python/tree/main/Pure_Beurre/substitute/project_tester/coverage_html/index.html)  
+Si vous rencontrez des problème lors de la lecture de ce fichier, téléchargez le dossier [coverage_html](https://github.com/StephenAOGOLO/P11_Ameliorez_un_projet_existant_en_python/tree/main/Pure_Beurre/substitute/project_tester/coverage_html/index.html) puis relisez le fichier [index.html](https://github.com/StephenAOGOLO/P11_Ameliorez_un_projet_existant_en_python/tree/main/Pure_Beurre/substitute/project_tester/coverage_html/index.html)  
+
+
 # Hébergement  
 Suite à l'intégration continue, la version finale du projet est envoyé sur la branche MASTER.  
 Le déploiement peut donc avoir lieu.  
