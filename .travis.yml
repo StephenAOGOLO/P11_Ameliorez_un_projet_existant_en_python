@@ -26,7 +26,7 @@ script:
   - ./Pure_Beurre/manage.py migrate
   - ./Pure_Beurre/manage.py environs
   - ./Pure_Beurre/manage.py all_aliments
-  - ./Pure_Beurre/manage.py test substitute.project_tester.tests substitute.project_tester.selenium
+  - coverage run --source='.' ./Pure_Beurre/manage.py test substitute.project_tester.tests substitute.project_tester.selenium
 
 
 
